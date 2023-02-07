@@ -83,4 +83,27 @@ class BaseModel
         $stmt = $this->conn->prepare($this->sqlBuilder);
         $stmt->execute($data);
     }
+
+    public function where($colName, $condition, $value)
+    {
+        $this->sqlBuilder = "Select * From $this->tableName WHERE `$colName` $condition '$value' ";
+        return $this;
+    }
+    public function andWhere($colName, $condition, $value)
+    {
+        $this->sqlBuilder .= " AND `$colName` $condition '$value' ";
+        return $this;
+    }
+    public function orWhere($colName, $condition, $value)
+    {
+        $this->sqlBuilder .= " OR `$colName` $condition '$value' ";
+        return $this;
+    }
+    public function get()
+    {
+        $stmt = $this->conn->prepare($this->sqlBuilder);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        return $result;
+    }
 }
