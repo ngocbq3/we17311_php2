@@ -48,4 +48,39 @@ class BaseModel
         $stmt = $this->conn->prepare($this->sqlBuilder);
         $stmt->execute($arr);
     }
+    /**
+     * function findOne lấy ra 1 bản ghi
+     * @param $id: tham số truyền vào là id (khóa chính)
+     */
+    public static function findOne($id)
+    {
+        $model = new static;
+        $model->sqlBuilder = "Select * From $model->tableName WHERE id='$id'";
+        $stmt = $model->conn->prepare($model->sqlBuilder);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        if ($result) {
+            return $result[0];
+        }
+        return false;
+    }
+
+    /**
+     * function update: cập nhật dữ liệu
+     * @param $id: tham số là khóa chính
+     * @param array $data: mảng dữ liệu 
+     */
+    public function update($id, $data = [])
+    {
+        $this->sqlBuilder = "Update $this->tableName SET ";
+        foreach ($data as $key => $value) {
+            $this->sqlBuilder .= "`$key`=:$key, ";
+        }
+        $this->sqlBuilder = rtrim($this->sqlBuilder, ", ");
+        $this->sqlBuilder .= " WHERE id=:id";
+
+        $data['id'] = $id;
+        $stmt = $this->conn->prepare($this->sqlBuilder);
+        $stmt->execute($data);
+    }
 }
