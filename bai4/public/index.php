@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\SiteController;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use App\Router;
@@ -14,6 +15,10 @@ Router::get('/', function () {
 Router::get('/contact', function () {
     echo "CONTACT PAGE";
 });
+
+Router::get('/site', [SiteController::class, 'index']);
+Router::get('/about', [SiteController::class, 'about']);
+
 
 $router->resolve();
 

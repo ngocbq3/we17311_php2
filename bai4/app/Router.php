@@ -5,6 +5,11 @@ namespace App;
 class Router
 {
     public static $routes = [];
+    public Request $request;
+    public function __construct()
+    {
+        $this->request = new Request();
+    }
 
     public static function get($path, $callback)
     {
@@ -17,11 +22,21 @@ class Router
 
     public function resolve()
     {
-        $path = $_SERVER['REQUEST_URI'] ?? '/';
-        $path = str_replace('/we17311_php2/bai4/public/', '/', $path);
+        $path = $this->request->getPath();
+        $method = $this->request->getMethod();
 
+        $callback = static::$routes[$method][$path] ?? false;
+        if ($callback === false) {
+            echo "404 FILE NOT FOUND";
+            exit;
+        }
+        if (is_callable($callback)) {
+            $callback();
+        }
 
-        echo "<pre>";
-        var_dump(static::$routes);
+        if (is_array($callback)) {
+            $callback[0] = new $callback[0]();
+            return call_user_func($callback, []);
+        }
     }
 }
