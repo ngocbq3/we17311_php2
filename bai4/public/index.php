@@ -2,10 +2,22 @@
 
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
+use App\Router;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-$cate = new CategoryModel;
+$router = new Router;
+
+Router::get('/', function () {
+    echo "Hello World";
+});
+Router::get('/contact', function () {
+    echo "CONTACT PAGE";
+});
+
+$router->resolve();
+
+// $cate = new CategoryModel;
 
 // var_dump(CategoryModel::all());
 
@@ -20,10 +32,10 @@ $cate = new CategoryModel;
 // ];
 // $cate->update("19 OR cate_name='blazer'", $data);
 
-$product = new ProductModel;
-$result = $product->where('cate_id', '=', 2)
-    ->andWhere('price', '>', 5)
-    ->orWhere('name', '=', 'Samsung galaxy ultra')
-    ->get();
-echo "<pre>";
-var_dump($result);
+// $product = new ProductModel;
+// $result = $product->where('cate_id', '=', 2)
+//     ->andWhere('price', '>', 5)
+//     ->orWhere('name', '=', 'Samsung galaxy ultra')
+//     ->get();
+// echo "<pre>";
+// var_dump($result);
