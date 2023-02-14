@@ -24,11 +24,11 @@
                 <td><?= $product->id ?></td>
                 <td><?= $product->name ?></td>
                 <td>
-                    <img src="images/<?= $product->image ?>" width="120" alt="">
+                    <img src="images/<?= $product->image ?>" width='100' alt="">
                 </td>
-                <td>Action</td>
             </tr>
         <?php endforeach ?>
+
     </table>
 </body>
 

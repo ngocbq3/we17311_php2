@@ -16,8 +16,11 @@
         <br>
         Category:
         <select name="cate_id" id="">
-            <option value="1">Iphone</option>
-            <option value="2">Samsung</option>
+            <?php foreach ($categories as $cate) : ?>
+                <option value="<?= $cate->id ?>">
+                    <?= $cate->cate_name ?>
+                </option>
+            <?php endforeach ?>
         </select>
         <br>
         price: <input type="number" name="price" id="">
