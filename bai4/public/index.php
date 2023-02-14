@@ -18,6 +18,8 @@ Router::get('/contact', function () {
 
 Router::get('/site', [SiteController::class, 'index']);
 Router::get('/about', [SiteController::class, 'about']);
+Router::get('/contact', [SiteController::class, 'contact']);
+Router::post('/contact', [SiteController::class, 'contactHandle']);
 
 
 $router->resolve();

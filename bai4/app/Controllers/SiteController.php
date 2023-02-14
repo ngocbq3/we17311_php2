@@ -2,14 +2,21 @@
 
 namespace App\Controllers;
 
-class SiteController
+use App\Models\ProductModel;
+
+class SiteController extends Controller
 {
     public function index()
     {
-        echo static::class . " Action Index<br>";
+        $products = ProductModel::all();
+        $this->view('home', ['products' => $products]);
     }
     public function about()
     {
-        echo static::class . " Action About<br />";
+        $person = [
+            'name' => 'ngocbq',
+            'email' => 'ngocbq3@fe.edu.vn'
+        ];
+        $this->view('about', ['person' => $person]);
     }
 }
