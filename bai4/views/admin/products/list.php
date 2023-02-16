@@ -10,6 +10,7 @@
 
 <body>
     <table border="1">
+
         <tr>
             <th>ID</th>
             <th>name</th>
@@ -19,12 +20,16 @@
             </th>
         </tr>
 
+
         <?php foreach ($products as $product) : ?>
             <tr>
                 <td><?= $product->id ?></td>
                 <td><?= $product->name ?></td>
                 <td>
                     <img src="images/<?= $product->image ?>" width='100' alt="">
+                </td>
+                <td>
+                    <a href="/update-product?id=<?= $product->id ?>">Edit</a>
                 </td>
             </tr>
         <?php endforeach ?>

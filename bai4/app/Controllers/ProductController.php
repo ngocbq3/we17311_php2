@@ -40,4 +40,20 @@ class ProductController extends Controller
         header("location:/product");
         exit;
     }
+
+    public function show(Request $request)
+    {
+        $id = $request->getBody()['id'];
+        $product = ProductModel::findOne($id);
+        $categories = CategoryModel::all();
+
+        return $this->view(
+            'admin/products/edit',
+            [
+                'product' => $product,
+                'categories' => $categories,
+                'title' => 'Cập nhật sản phẩm'
+            ]
+        );
+    }
 }

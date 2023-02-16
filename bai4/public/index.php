@@ -24,5 +24,7 @@ Router::post('/contact', [SiteController::class, 'contactHandle']);
 Router::get('/product', [ProductController::class, 'index']);
 Router::get('/create-product', [ProductController::class, 'create']);
 Router::post('/create-product', [ProductController::class, 'store']);
+Router::get('/update-product', [ProductController::class, 'show']);
+Router::post('/update-product', [ProductController::class, 'update']);
 
 $router->resolve();
